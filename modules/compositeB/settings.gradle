@@ -1,0 +1,4 @@
+include ':compositeblibrary2'
+include ':compositeblibrary1'
+include ':app'
+rootProject.name = "compositeB"

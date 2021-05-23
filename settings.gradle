@@ -1,0 +1,26 @@
+include ':app'
+rootProject.name = "CompositeBuild"
+
+//File compositeALibrary1 = file('modules/compositeA')
+File compositeALibrary1 = file('/Users/bytedance/AndroidStudioProjects/compositebuild/modules/compositeA')
+System.out.println(compositeALibrary1.name + " - " + compositeALibrary1.absolutePath)
+includeBuild compositeALibrary1 , {
+    ConfigurableIncludedBuild configurableIncludedBuild ->
+        configurableIncludedBuild.dependencySubstitution {
+            DependencySubstitutions dependencySubstitutions ->
+                substitute module("com.szy:compositeAlibrary1") with project(':compositeAlibrary1')
+                dependencySubstitutions.all {
+                    DependencySubstitution dependencySubstitution ->
+//                        println("dependencyName -- " + dependencySubstitution.requested.displayName)
+//                        if ("com.szy:compositeAlibrary1:1.0".equals(dependencySubstitution.requested.displayName)) {
+//                            println("enter")
+
+//                        }
+                }
+        }
+}
+
+File compositeBLibrary1 = file('modules/compositeB')
+includeBuild compositeBLibrary1
+
+//include ':modules:compositeA:compositeAlibrary1'
